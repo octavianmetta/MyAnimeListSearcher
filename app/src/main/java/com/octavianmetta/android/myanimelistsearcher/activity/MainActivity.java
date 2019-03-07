@@ -43,11 +43,12 @@ public class MainActivity extends AppCompatActivity {
         malAdapter = new MALAdapter(MainActivity.this, malResultsList);
         recyclerView.setAdapter(malAdapter);
 
-        viewModel.getSearch().observe(this, new Observer<List<MALResponse>>() {
+        viewModel.getSearch().observe(this, new Observer<MALResponse>() {
             @Override
-            public void onChanged(@Nullable List<MALResponse> malResponse) {
-                malAdapter.updateMAL(malResponse);
+            public void onChanged(@Nullable MALResponse malResponses) {
+                malAdapter.updateMAL(malResponses);
             }
         });
     }
 }
+//TODO : Add search bar and clickable adapter

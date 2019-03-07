@@ -5,9 +5,8 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.octavianmetta.android.myanimelistsearcher.models.MALResponse;
-import com.octavianmetta.android.myanimelistsearcher.models.MALResults;
 import com.octavianmetta.android.myanimelistsearcher.rest.APIService;
-import com.octavianmetta.android.myanimelistsearcher.rest.MALClient;
+import com.octavianmetta.android.myanimelistsearcher.rest.RetrofitClient;
 
 import java.util.List;
 
@@ -21,13 +20,12 @@ import retrofit2.Retrofit;
 
 public class MALViewModel extends ViewModel {
 
-    private MutableLiveData<List<MALResponse>> malResponse;
-
+    private MutableLiveData<MALResponse> malResponse;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    public LiveData<List<MALResponse>> getSearch(){
+    public LiveData<MALResponse> getSearch(){
         if (malResponse == null){
-            malResponse = new MutableLiveData<List<MALResponse>>();
+            malResponse = new MutableLiveData<MALResponse>();
             loadMALSearch();
         }
         return malResponse;
@@ -35,20 +33,20 @@ public class MALViewModel extends ViewModel {
 
     private void loadMALSearch(){
 
-        Retrofit retrofit = MALClient.getClient(APIService.BASE_URL);
+        Retrofit retrofit = RetrofitClient.getClient(APIService.BASE_URL);
         APIService MALApi = retrofit.create(APIService.class);
-        Observable<List<MALResponse>> MALObservable = MALApi.getSearch("Persona");
+        Observable<MALResponse> MALObservable = MALApi.getSearch("anime","Bakemonogatari",1);
 
         MALObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<MALResponse>>() {
+                .subscribe(new Observer<MALResponse>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         compositeDisposable.add(d);
                     }
 
                     @Override
-                    public void onNext(List<MALResponse> malResponses) {
+                    public void onNext(MALResponse malResponses) {
                         malResponse.setValue(malResponses);
 
 

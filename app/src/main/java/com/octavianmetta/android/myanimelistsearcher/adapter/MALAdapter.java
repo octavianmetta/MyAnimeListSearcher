@@ -17,7 +17,7 @@ import java.util.List;
 public class MALAdapter extends RecyclerView.Adapter<MALAdapter.MALViewHolder> {
 
     private List<MALResults> malResultsList;
-    private List<MALResponse> malResponseList;
+    private MALResponse malResponse;
     private LayoutInflater layoutInflater;
     private Context mCtx;
 
@@ -63,9 +63,14 @@ public class MALAdapter extends RecyclerView.Adapter<MALAdapter.MALViewHolder> {
         return malResultsList.size();
     }
 
-    public void updateMAL(List<MALResponse> malResponses){
-        this.malResponseList = malResponses;
-        this.malResultsList = this.malResponseList.get(0).results;
+    public void updateMAL(MALResponse malResponses){
+        this.malResponse = malResponses;
+
+        if (malResponse != null){
+            List<MALResults> malResults = malResponses.getResults();
+            this.malResultsList = malResults;
+        }
+
         notifyDataSetChanged();
     }
 }

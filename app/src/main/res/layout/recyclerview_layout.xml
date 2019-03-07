@@ -12,7 +12,12 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/card_margin">
+        app:cardBackgroundColor="#E6E6E6"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        android:layout_margin="@dimen/card_margin"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground">
 
         <RelativeLayout
             android:id="@+id/activity_main"
@@ -35,7 +40,7 @@
                 android:layout_marginRight="@dimen/card_margin"
                 android:adjustViewBounds="false"
                 tools:srcCompat="@tools:sample/avatars"
-                app:imageUrl="@{MALResults.imageUrl}"
+                app:imageUrl="@{MAL.imageUrl}"
                 android:contentDescription="@string/thumbnail_desc"/>
 
             <LinearLayout
@@ -46,42 +51,18 @@
                 android:layout_alignParentRight="true"
                 android:layout_margin="@dimen/card_margin"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tv_Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:text="@{MALResults.title}"
-                    android:textAlignment="center" />
-
-                <TextView
-                    android:id="@+id/tv_Airing"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:text="@{MALResults.airing}"
-                    android:textAlignment="center" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    app:text="@{MAL.title}" />
                 <TextView
                     android:id="@+id/tv_Type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:text="@{MALResults.type}"
-                    android:textAlignment="viewStart" />
-                <TextView
-                    android:id="@+id/tv_Episodes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:text="@{MALResults.episodes}"
-                    android:textAlignment="center" />
-                <TextView
-                    android:id="@+id/tv_Score"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:text="@{MALResults.score}"
-                    android:textAlignment="viewStart" />
-                <TextView
-                    android:id="@+id/tv_Rated"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:text="@{MALResults.rated}"
+                    app:text="@{`(` + MAL.type + `, ` + MAL.startDate + `)`}"
                     android:textAlignment="viewStart" />
 
             </LinearLayout>

@@ -52,7 +52,9 @@ public class MALResults extends BaseObservable {
     @Expose
     public String rated;
 
-    public MALResults(Integer malId, String url, String imageUrl, String title, Boolean airing, String synopsis, String type, Integer episodes, Double score, String startDate, String endDate, Integer members, String rated) {
+    public MALResults(Integer malId, String url, String imageUrl, String title, Boolean airing,
+                      String synopsis, String type, Integer episodes, Double score,
+                      String startDate, String endDate, Integer members, String rated) {
         this.malId = malId;
         this.url = url;
         this.imageUrl = imageUrl;
@@ -161,12 +163,14 @@ public class MALResults extends BaseObservable {
         notifyPropertyChanged(BR.score);
     }
 
+    @Bindable
     public String getStartDate() {
-        return startDate;
+        return startDate.substring(0,4);
     }
 
     public void setStartDate(String startDate) {
         this.startDate = startDate;
+        notifyPropertyChanged(BR.startDate);
     }
 
     public String getEndDate() {
