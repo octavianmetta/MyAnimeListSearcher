@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name = "MAL"
+            type = "com.octavianmetta.android.myanimelistsearcher.models.MALResults">
+        </variable>
+    </data>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/card_margin">
+
+        <RelativeLayout
+            android:id="@+id/activity_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:weightSum="1">
+            <ImageView
+                android:id="@+id/iv_Thumbnail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/card_margin"
+                android:layout_marginLeft="@dimen/card_margin"
+                android:layout_marginRight="@dimen/card_margin"
+                android:adjustViewBounds="false"
+                tools:srcCompat="@tools:sample/avatars"
+                app:imageUrl="@{MALResults.imageUrl}"
+                android:contentDescription="@string/thumbnail_desc"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_Thumbnail"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/card_margin"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:text="@{MALResults.title}"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/tv_Airing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:text="@{MALResults.airing}"
+                    android:textAlignment="center" />
+                <TextView
+                    android:id="@+id/tv_Type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:text="@{MALResults.type}"
+                    android:textAlignment="viewStart" />
+                <TextView
+                    android:id="@+id/tv_Episodes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:text="@{MALResults.episodes}"
+                    android:textAlignment="center" />
+                <TextView
+                    android:id="@+id/tv_Score"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:text="@{MALResults.score}"
+                    android:textAlignment="viewStart" />
+                <TextView
+                    android:id="@+id/tv_Rated"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:text="@{MALResults.rated}"
+                    android:textAlignment="viewStart" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+</layout>
