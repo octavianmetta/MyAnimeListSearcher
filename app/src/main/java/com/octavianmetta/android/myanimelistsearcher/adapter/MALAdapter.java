@@ -15,6 +15,8 @@ import com.octavianmetta.android.myanimelistsearcher.models.MALResults;
 
 import java.util.List;
 
+import javax.xml.transform.Result;
+
 public class MALAdapter extends RecyclerView.Adapter<MALAdapter.MALViewHolder> {
 
     private static final int ITEM = 0;
@@ -73,7 +75,13 @@ public class MALAdapter extends RecyclerView.Adapter<MALAdapter.MALViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MALViewHolder holder, int position) {
         MALResults malResults = malResultsList.get(position);
-        holder.bind(malResults);
+        switch (getItemViewType(position)){
+            case ITEM:
+                holder.bind(malResults);
+                break;
+            case LOADING:
+                break;
+        }
 
     }
 
@@ -82,9 +90,65 @@ public class MALAdapter extends RecyclerView.Adapter<MALAdapter.MALViewHolder> {
         return malResultsList == null ? 0 : malResultsList.size();
     }
 
+    public int getItemViewType(int position){
+        return (position == malResultsList.size() - 1 && isLoadingAdded) ? LOADING : ITEM;
+    }
+
     public void updateMALResults(List<MALResults> malSearchResults){
         this.malResultsList = malSearchResults;
         Log.d("Result", malResultsList.get(0).getTitle());
         notifyDataSetChanged();
+    }
+
+    public void add(MALResults r){
+        malResultsList.add(r);
+        notifyItemInserted(malResultsList.size() - 1);
+    }
+
+    public void addAll(List<MALResults> resultsList){
+        for(MALResults malResults : resultsList){
+            add(malResults);
+        }
+    }
+
+    public void remove(MALResults r){
+        int position = malResultsList.indexOf(r);
+        if (position > -1){
+            malResultsList.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    public void clear() {
+        isLoadingAdded = false;
+        while (getItemCount() > 0) {
+            remove(getItem(0));
+        }
+    }
+
+    public boolean isEmpty() {
+        return getItemCount() == 0;
+    }
+
+
+    public void addLoadingFooter() {
+        isLoadingAdded = true;
+        add(new MALResults());
+    }
+
+    public void removeLoadingFooter() {
+        isLoadingAdded = false;
+
+        int position = malResultsList.size() - 1;
+        MALResults result = getItem(position);
+
+        if (result != null) {
+            malResultsList.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    public MALResults getItem(int position) {
+        return malResultsList.get(position);
     }
 }

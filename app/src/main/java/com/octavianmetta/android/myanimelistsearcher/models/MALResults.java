@@ -54,23 +54,6 @@ public class MALResults extends BaseObservable {
     @Expose
     public String rated;
 
-    public MALResults(Integer malId, String url, String imageUrl, String title, Boolean airing,
-                      String synopsis, String type, Integer episodes, Double score,
-                      String startDate, String endDate, Integer members, String rated) {
-        this.malId = malId;
-        this.url = url;
-        this.imageUrl = imageUrl;
-        this.title = title;
-        this.airing = airing;
-        this.synopsis = synopsis;
-        this.type = type;
-        this.episodes = episodes;
-        this.score = score;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.members = members;
-        this.rated = rated;
-    }
 
     public Integer getMalId() {
         return malId;

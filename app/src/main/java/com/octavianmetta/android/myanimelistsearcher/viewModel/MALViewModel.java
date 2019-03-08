@@ -33,17 +33,17 @@ public class MALViewModel extends ViewModel {
     private MutableLiveData<List<MALResults>> malResults;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    public LiveData<List<MALResults>> getMALData(){
+    public LiveData<List<MALResults>> getMALData(Integer page){
         if(malResults == null){
             malResults = new MutableLiveData<>();
-            initMALData();
+            initMALData(page);
         }
         return malResults;
     }
 
-    private void initMALData() {
+    private void initMALData(Integer page) {
         //Dipanggil ketika program pertama berjalan. Untuk mendapatkan top airing anime
-        Observable<MALTopResponse> MALObservable = MALApi.getTopAnime("anime",1);
+        Observable<MALTopResponse> MALObservable = MALApi.getTopAnime("anime",page);
         MALObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<MALTopResponse>() {
@@ -69,9 +69,9 @@ public class MALViewModel extends ViewModel {
                 });
     }
 
-    public void loadMALSearch(String title){
+    public void loadMALSearch(String title, Integer page){
         //Dijalankan setelah search. Untuk mendapatkan data hasil search
-        Observable<MALSearchResponse> MALObservable = MALApi.getSearch("anime",title ,1);
+        Observable<MALSearchResponse> MALObservable = MALApi.getSearch("anime",title ,page);
         MALObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<MALSearchResponse>() {

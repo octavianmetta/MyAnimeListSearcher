@@ -58,5 +58,5 @@ dependencies {
 
     implementation "android.arch.paging:runtime:1.0.1"
 
-
+    implementation 'com.github.markomilos:paginate:0.5.1'
 }
