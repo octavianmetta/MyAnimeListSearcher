@@ -2,10 +2,8 @@ package com.octavianmetta.android.myanimelistsearcher.activity;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +15,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.octavianmetta.android.myanimelistsearcher.DataBinderMapperImpl;
 import com.octavianmetta.android.myanimelistsearcher.R;
 import com.octavianmetta.android.myanimelistsearcher.adapter.MALAdapter;
 import com.octavianmetta.android.myanimelistsearcher.databinding.ActivityMainBinding;
@@ -36,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private List<MALResults> malResultsList;
     private MALViewModel viewModel;
     private LinearLayoutManager linearLayoutManager;
+    private String searchQuery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +52,15 @@ public class MainActivity extends AppCompatActivity {
         malAdapter = new MALAdapter(MainActivity.this, malResultsList);
         recyclerView.setAdapter(malAdapter);
 
+        viewModel.getSearch(searchQuery).observe(MainActivity.this, new Observer<MALResponse>() {
+            @Override
+            public void onChanged(@Nullable MALResponse malResponses) {
+                Log.d("Diterima",malResponses.results.get(0).getTitle());
+                malAdapter.updateMALResults(malResponses);
+                binding.itemProgressBar.setVisibility(View.INVISIBLE);
+
+            }
+        });
     }
 
 
@@ -66,17 +73,11 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                binding.itemProgressBar.setVisibility(View.VISIBLE);
+                //binding.itemProgressBar.setVisibility(View.VISIBLE);
                 searchView.clearFocus();
+                searchQuery = query;
+                viewModel.getSearch(query);
 
-                viewModel.getSearch(query).observe(MainActivity.this, new Observer<MALResponse>() {
-                    @Override
-                    public void onChanged(@Nullable MALResponse malResponses) {
-                        Log.d("Diterima",malResponses.results.get(0).getTitle());
-                        malAdapter.updateMAL(malResponses);
-                        binding.itemProgressBar.setVisibility(View.INVISIBLE);
-                    }
-                });
                 return false;
             }
 

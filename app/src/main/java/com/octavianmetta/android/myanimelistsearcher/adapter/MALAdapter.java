@@ -76,6 +76,7 @@ public class MALAdapter extends RecyclerView.Adapter<MALAdapter.MALViewHolder> {
     public void onBindViewHolder(@NonNull MALViewHolder holder, int position) {
         MALResults malResults = malResultsList.get(position);
         holder.bind(malResults);
+
     }
 
     @Override
@@ -83,7 +84,7 @@ public class MALAdapter extends RecyclerView.Adapter<MALAdapter.MALViewHolder> {
         return malResultsList == null ? 0 : malResultsList.size();
     }
 
-    public void updateMAL(MALResponse malResponses){
+    public void updateMALResults(MALResponse malResponses){
         this.malResponse = malResponses;
         if (malResponse != null){
             List<MALResults> malResults = malResponses.getResults();

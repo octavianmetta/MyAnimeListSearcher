@@ -4,12 +4,14 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.octavianmetta.android.myanimelistsearcher.BR;
+import com.octavianmetta.android.myanimelistsearcher.activity.MainActivity;
 
 public class MALResults extends BaseObservable {
     @SerializedName("mal_id")
@@ -165,12 +167,20 @@ public class MALResults extends BaseObservable {
 
     @Bindable
     public String getStartDate() {
-        if(startDate.length()>4 && !startDate.isEmpty()){
-            return startDate.substring(0,4);
+        try{
+            if(startDate.length()>4 && !startDate.isEmpty()){
+                return startDate.substring(0,4);
+            }
+            else {
+                return "Unknown";
+            }
+
         }
-        else {
+        catch (Exception e){
+            e.printStackTrace();
             return "Unknown";
         }
+
     }
 
     public void setStartDate(String startDate) {

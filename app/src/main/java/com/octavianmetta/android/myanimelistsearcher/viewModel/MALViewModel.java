@@ -25,10 +25,9 @@ public class MALViewModel extends ViewModel {
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public LiveData<MALResponse> getSearch(String title){
-        if (malResponse == null){
-            malResponse = new MutableLiveData<MALResponse>();
-            loadMALSearch(title);
-        }
+        malResponse = new MutableLiveData<MALResponse>();
+        loadMALSearch(title);
+
         return malResponse;
     }
 
@@ -48,10 +47,8 @@ public class MALViewModel extends ViewModel {
 
                     @Override
                     public void onNext(MALResponse malResponses) {
-                        Log.d("Response", malResponses.results.get(0).getTitle());
-
                         malResponse.setValue(malResponses);
-
+                        Log.d("Response", malResponses.results.get(0).getTitle());
 
                     }
 
