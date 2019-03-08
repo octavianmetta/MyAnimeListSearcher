@@ -165,7 +165,12 @@ public class MALResults extends BaseObservable {
 
     @Bindable
     public String getStartDate() {
-        return startDate.substring(0,4);
+        if(startDate.length()>4 && !startDate.isEmpty()){
+            return startDate.substring(0,4);
+        }
+        else {
+            return "Unknown";
+        }
     }
 
     public void setStartDate(String startDate) {

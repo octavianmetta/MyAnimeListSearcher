@@ -3,6 +3,7 @@ package com.octavianmetta.android.myanimelistsearcher.viewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.util.Log;
 
 import com.octavianmetta.android.myanimelistsearcher.models.MALResponse;
 import com.octavianmetta.android.myanimelistsearcher.rest.APIService;
@@ -23,19 +24,19 @@ public class MALViewModel extends ViewModel {
     private MutableLiveData<MALResponse> malResponse;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    public LiveData<MALResponse> getSearch(){
+    public LiveData<MALResponse> getSearch(String title){
         if (malResponse == null){
             malResponse = new MutableLiveData<MALResponse>();
-            loadMALSearch();
+            loadMALSearch(title);
         }
         return malResponse;
     }
 
-    private void loadMALSearch(){
+    private void loadMALSearch(String title){
 
         Retrofit retrofit = RetrofitClient.getClient(APIService.BASE_URL);
         APIService MALApi = retrofit.create(APIService.class);
-        Observable<MALResponse> MALObservable = MALApi.getSearch("anime","Bakemonogatari",1);
+        Observable<MALResponse> MALObservable = MALApi.getSearch("anime",title ,1);
 
         MALObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -47,6 +48,8 @@ public class MALViewModel extends ViewModel {
 
                     @Override
                     public void onNext(MALResponse malResponses) {
+                        Log.d("Response", malResponses.results.get(0).getTitle());
+
                         malResponse.setValue(malResponses);
 
 

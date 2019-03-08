@@ -9,66 +9,88 @@
             type = "com.octavianmetta.android.myanimelistsearcher.models.MALResults">
         </variable>
     </data>
-    <android.support.v7.widget.CardView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="#E6E6E6"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="8dp"
-        android:layout_margin="@dimen/card_margin"
-        android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackground">
-
-        <RelativeLayout
-            android:id="@+id/activity_main"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:weightSum="1">
-            <ImageView
-                android:id="@+id/iv_Thumbnail"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/card_margin"
+            app:cardElevation="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="4dp"
+            android:foreground="?android:attr/selectableItemBackground">
+            <android.support.v7.widget.CardView
+                style="@style/Widget.MaterialComponents.CardView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="@dimen/card_margin"
-                android:layout_marginLeft="@dimen/card_margin"
-                android:layout_marginRight="@dimen/card_margin"
-                android:adjustViewBounds="false"
-                tools:srcCompat="@tools:sample/avatars"
-                app:imageUrl="@{MAL.imageUrl}"
-                android:contentDescription="@string/thumbnail_desc"/>
+                android:layout_margin="@dimen/activity_margin_half"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="14dp"
+                app:cardPreventCornerOverlap="false">
 
+                <ImageView
+                    android:id="@+id/iv_Thumbnail"
+                    android:layout_width="@dimen/poster_thumb_width"
+                    android:layout_height="@dimen/poster_thumb_height"
+                    app:imageUrl="@{MAL.imageUrl}"
+                    android:contentDescription="@string/thumbnail_desc"/>
+
+            </android.support.v7.widget.CardView>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/iv_Thumbnail"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_margin="@dimen/card_margin"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="@dimen/activity_margin"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/activity_margin"
+                android:paddingEnd="@dimen/activity_margin"
+                android:paddingLeft="@dimen/poster_thumb_width"
+                android:paddingRight="@dimen/activity_margin"
+                android:paddingStart="@dimen/poster_thumb_width"
+                android:paddingTop="@dimen/activity_margin_half">
+
+                <TextView
+                    android:id="@+id/tv_Type"
+                    style="@style/TextAppearance.AppCompat.Caption"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin_content"
+                    android:layout_marginStart="@dimen/activity_margin_content"
+                    android:alpha="0.38"
+                    android:gravity="end"
+                    android:maxLines="1"
+                    android:textStyle="bold"
+                    app:text="@{`(` + MAL.type + `, ` + MAL.startDate + `)`}"/>
 
                 <TextView
                     android:id="@+id/tv_Title"
+                    style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    app:text="@{MAL.title}" />
+                    android:layout_marginLeft="@dimen/activity_margin_content"
+                    android:layout_marginStart="@dimen/activity_margin_content"
+                    android:layout_marginTop="@dimen/activity_margin_quarter"
+                    android:maxLines="1"
+                    app:text="@{MAL.title}"/>
+
                 <TextView
-                    android:id="@+id/tv_Type"
+                    android:id="@+id/tv_synopsis"
+                    style="@style/TextAppearance.AppCompat.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:text="@{`(` + MAL.type + `, ` + MAL.startDate + `)`}"
-                    android:textAlignment="viewStart" />
+                    android:layout_marginLeft="@dimen/activity_margin_content"
+                    android:layout_marginStart="@dimen/activity_margin_content"
+                    android:layout_marginTop="@dimen/activity_margin_half"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    app:text="@{MAL.synopsis}"/>
 
             </LinearLayout>
+        </android.support.v7.widget.CardView>
 
+    </FrameLayout>
 
-        </RelativeLayout>
-
-    </android.support.v7.widget.CardView>
 </layout>
