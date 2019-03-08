@@ -1,15 +1,11 @@
 package com.octavianmetta.android.myanimelistsearcher.models;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.octavianmetta.android.myanimelistsearcher.BR;
 
 import java.util.List;
 
-public class MALResponse extends BaseObservable {
+public class MALTopResponse {
     @SerializedName("request_hash")
     @Expose
     public String requestHash;
@@ -19,19 +15,15 @@ public class MALResponse extends BaseObservable {
     @SerializedName("request_cache_expiry")
     @Expose
     public Integer requestCacheExpiry;
-    @SerializedName("results")
+    @SerializedName("top")
     @Expose
-    public List<MALResults> results = null;
-    @SerializedName("last_page")
-    @Expose
-    public Integer lastPage;
+    public List<MALResults> top = null;
 
-    public MALResponse(String requestHash, Boolean requestCached, Integer requestCacheExpiry, List<MALResults> results, Integer lastPage) {
+    public MALTopResponse(String requestHash, Boolean requestCached, Integer requestCacheExpiry, List<MALResults> top) {
         this.requestHash = requestHash;
         this.requestCached = requestCached;
         this.requestCacheExpiry = requestCacheExpiry;
-        this.results = results;
-        this.lastPage = lastPage;
+        this.top = top;
     }
 
     public String getRequestHash() {
@@ -58,22 +50,12 @@ public class MALResponse extends BaseObservable {
         this.requestCacheExpiry = requestCacheExpiry;
     }
 
-    @Bindable
-    public List<MALResults> getResults() {
-        return results;
+    public List<MALResults> getTop() {
+        return top;
     }
 
-    public void setResults(List<MALResults> results) {
-        this.results = results;
-        notifyPropertyChanged(BR.results);
-
+    public void setTop(List<MALResults> top) {
+        this.top = top;
     }
 
-    public Integer getLastPage() {
-        return lastPage;
-    }
-
-    public void setLastPage(Integer lastPage) {
-        this.lastPage = lastPage;
-    }
 }

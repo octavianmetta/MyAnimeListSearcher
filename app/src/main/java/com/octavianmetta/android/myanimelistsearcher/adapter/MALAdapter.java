@@ -6,13 +6,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.octavianmetta.android.myanimelistsearcher.R;
-import com.octavianmetta.android.myanimelistsearcher.activity.MainActivity;
 import com.octavianmetta.android.myanimelistsearcher.databinding.RecyclerviewLayoutBinding;
-import com.octavianmetta.android.myanimelistsearcher.models.MALResponse;
+import com.octavianmetta.android.myanimelistsearcher.models.MALSearchResponse;
 import com.octavianmetta.android.myanimelistsearcher.models.MALResults;
 
 import java.util.List;
@@ -24,7 +22,7 @@ public class MALAdapter extends RecyclerView.Adapter<MALAdapter.MALViewHolder> {
     private boolean isLoadingAdded = false;
 
     private List<MALResults> malResultsList;
-    private MALResponse malResponse;
+    private MALSearchResponse malSearchResponse;
     private LayoutInflater layoutInflater;
     private Context mCtx;
 
@@ -84,15 +82,9 @@ public class MALAdapter extends RecyclerView.Adapter<MALAdapter.MALViewHolder> {
         return malResultsList == null ? 0 : malResultsList.size();
     }
 
-    public void updateMALResults(MALResponse malResponses){
-        this.malResponse = malResponses;
-        if (malResponse != null){
-            List<MALResults> malResults = malResponses.getResults();
-            this.malResultsList = malResults;
-            Log.d("Result", malResultsList.get(0).getTitle());
-
-        }
-
+    public void updateMALResults(List<MALResults> malSearchResults){
+        this.malResultsList = malSearchResults;
+        Log.d("Result", malResultsList.get(0).getTitle());
         notifyDataSetChanged();
     }
 }

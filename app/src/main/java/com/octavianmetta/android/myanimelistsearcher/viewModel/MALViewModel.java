@@ -4,8 +4,12 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.util.Log;
+import android.view.View;
 
-import com.octavianmetta.android.myanimelistsearcher.models.MALResponse;
+import com.octavianmetta.android.myanimelistsearcher.activity.MainActivity;
+import com.octavianmetta.android.myanimelistsearcher.models.MALSearchResponse;
+import com.octavianmetta.android.myanimelistsearcher.models.MALResults;
+import com.octavianmetta.android.myanimelistsearcher.models.MALTopResponse;
 import com.octavianmetta.android.myanimelistsearcher.rest.APIService;
 import com.octavianmetta.android.myanimelistsearcher.rest.RetrofitClient;
 
@@ -21,35 +25,36 @@ import retrofit2.Retrofit;
 
 public class MALViewModel extends ViewModel {
 
-    private MutableLiveData<MALResponse> malResponse;
+    //Init Retrofit
+    private Retrofit retrofit = RetrofitClient.getClient(APIService.BASE_URL);
+    private APIService MALApi = retrofit.create(APIService.class);
+
+    //Init RxJava
+    private MutableLiveData<List<MALResults>> malResults;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    public LiveData<MALResponse> getSearch(String title){
-        malResponse = new MutableLiveData<MALResponse>();
-        loadMALSearch(title);
-
-        return malResponse;
+    public LiveData<List<MALResults>> getMALData(){
+        if(malResults == null){
+            malResults = new MutableLiveData<>();
+            initMALData();
+        }
+        return malResults;
     }
 
-    private void loadMALSearch(String title){
-
-        Retrofit retrofit = RetrofitClient.getClient(APIService.BASE_URL);
-        APIService MALApi = retrofit.create(APIService.class);
-        Observable<MALResponse> MALObservable = MALApi.getSearch("anime",title ,1);
-
+    private void initMALData() {
+        //Dipanggil ketika program pertama berjalan. Untuk mendapatkan top airing anime
+        Observable<MALTopResponse> MALObservable = MALApi.getTopAnime("anime",1);
         MALObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<MALResponse>() {
+                .subscribe(new Observer<MALTopResponse>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         compositeDisposable.add(d);
                     }
 
                     @Override
-                    public void onNext(MALResponse malResponses) {
-                        malResponse.setValue(malResponses);
-                        Log.d("Response", malResponses.results.get(0).getTitle());
-
+                    public void onNext(MALTopResponse malTopResponse) {
+                        malResults.postValue(malTopResponse.top);
                     }
 
                     @Override
@@ -64,9 +69,40 @@ public class MALViewModel extends ViewModel {
                 });
     }
 
+    public void loadMALSearch(String title){
+        //Dijalankan setelah search. Untuk mendapatkan data hasil search
+        Observable<MALSearchResponse> MALObservable = MALApi.getSearch("anime",title ,1);
+        MALObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<MALSearchResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        compositeDisposable.add(d);
+                    }
+
+                    @Override
+                    public void onNext(MALSearchResponse malSearchResponses) {
+                        malResults.postValue(malSearchResponses.results);
+                        Log.d("Response", malSearchResponses.results.get(0).getTitle());
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
     @Override
     protected void onCleared() {
         if(compositeDisposable != null || !compositeDisposable.isDisposed())
             compositeDisposable.clear();
     }
+
 }

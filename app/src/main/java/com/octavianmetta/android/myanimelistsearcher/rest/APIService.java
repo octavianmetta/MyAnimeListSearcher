@@ -1,9 +1,8 @@
 package com.octavianmetta.android.myanimelistsearcher.rest;
 
-import com.octavianmetta.android.myanimelistsearcher.models.MALResponse;
+import com.octavianmetta.android.myanimelistsearcher.models.MALSearchResponse;
+import com.octavianmetta.android.myanimelistsearcher.models.MALTopResponse;
 
-
-import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -15,7 +14,11 @@ public interface APIService {
     String BASE_URL = "https://api.jikan.moe/v3/";
 
     @GET("search/{type}")
-    Observable<MALResponse> getSearch(@Path("type") String type,
-                                      @Query("q") String title,
-                                      @Query("page") Integer page);
+    Observable<MALSearchResponse> getSearch(@Path("type") String type,
+                                            @Query("q") String title,
+                                            @Query("page") Integer page);
+
+    @GET("top/{type}/{page}/airing")
+    Observable<MALTopResponse> getTopAnime(@Path("type") String type,
+                                           @Path("page") Integer page);
 }
