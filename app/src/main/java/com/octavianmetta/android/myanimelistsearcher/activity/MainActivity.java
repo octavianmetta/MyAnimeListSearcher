@@ -18,9 +18,8 @@ import android.view.View;
 import com.octavianmetta.android.myanimelistsearcher.R;
 import com.octavianmetta.android.myanimelistsearcher.adapter.MALAdapter;
 import com.octavianmetta.android.myanimelistsearcher.databinding.ActivityMainBinding;
-import com.octavianmetta.android.myanimelistsearcher.models.MALSearchResponse;
 import com.octavianmetta.android.myanimelistsearcher.models.MALResults;
-import com.octavianmetta.android.myanimelistsearcher.viewModel.MALViewModel;
+import com.octavianmetta.android.myanimelistsearcher.viewModel.MALSearchViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private MALAdapter malAdapter;
     public ActivityMainBinding binding;
     private List<MALResults> malResultsList;
-    private MALViewModel viewModel;
+    private MALSearchViewModel viewModel;
     private LinearLayoutManager linearLayoutManager;
 
     @Override
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        viewModel = ViewModelProviders.of(this).get(MALViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(MALSearchViewModel.class);
         malAdapter = new MALAdapter(MainActivity.this, malResultsList);
         recyclerView.setAdapter(malAdapter);
 
@@ -96,4 +95,4 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 }
-//TODO : clickable adapter
+//TODO : pagination

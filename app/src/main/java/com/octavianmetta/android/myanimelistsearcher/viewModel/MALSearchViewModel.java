@@ -10,6 +10,7 @@ import com.octavianmetta.android.myanimelistsearcher.activity.MainActivity;
 import com.octavianmetta.android.myanimelistsearcher.models.MALSearchResponse;
 import com.octavianmetta.android.myanimelistsearcher.models.MALResults;
 import com.octavianmetta.android.myanimelistsearcher.models.MALTopResponse;
+import com.octavianmetta.android.myanimelistsearcher.models.anime.AnimeModel;
 import com.octavianmetta.android.myanimelistsearcher.rest.APIService;
 import com.octavianmetta.android.myanimelistsearcher.rest.RetrofitClient;
 
@@ -23,13 +24,13 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
-public class MALViewModel extends ViewModel {
+public class MALSearchViewModel extends ViewModel {
 
     //Init Retrofit
     private Retrofit retrofit = RetrofitClient.getClient(APIService.BASE_URL);
     private APIService MALApi = retrofit.create(APIService.class);
 
-    //Init RxJava
+    //Init RxJava untuk search
     private MutableLiveData<List<MALResults>> malResults;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -40,6 +41,8 @@ public class MALViewModel extends ViewModel {
         }
         return malResults;
     }
+
+
 
     private void initMALData() {
         //Dipanggil ketika program pertama berjalan. Untuk mendapatkan top airing anime

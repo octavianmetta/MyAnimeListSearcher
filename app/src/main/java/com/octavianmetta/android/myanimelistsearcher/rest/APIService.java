@@ -2,6 +2,7 @@ package com.octavianmetta.android.myanimelistsearcher.rest;
 
 import com.octavianmetta.android.myanimelistsearcher.models.MALSearchResponse;
 import com.octavianmetta.android.myanimelistsearcher.models.MALTopResponse;
+import com.octavianmetta.android.myanimelistsearcher.models.anime.AnimeModel;
 
 
 import io.reactivex.Observable;
@@ -21,4 +22,7 @@ public interface APIService {
     @GET("top/{type}/{page}/airing")
     Observable<MALTopResponse> getTopAnime(@Path("type") String type,
                                            @Path("page") Integer page);
+
+    @GET("anime/{malId}")
+    Observable<AnimeModel> getAnime(@Path("malId") Integer malId);
 }
