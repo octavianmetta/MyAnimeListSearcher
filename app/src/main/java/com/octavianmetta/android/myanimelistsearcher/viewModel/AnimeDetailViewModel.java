@@ -62,6 +62,7 @@ public class AnimeDetailViewModel extends ViewModel {
                     }
                 });
     }
+    
     @Override
     protected void onCleared() {
         if(compositeDisposable != null || !compositeDisposable.isDisposed())

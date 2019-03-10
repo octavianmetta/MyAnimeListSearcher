@@ -123,7 +123,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/card_anime_videos"
+            android:id="@+id/card_anime_character"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/card_anime_overview"
@@ -134,23 +134,23 @@
             android:background="@color/background">
 
             <RelativeLayout
-                android:id="@+id/card_movie_videos_content"
+                android:id="@+id/card_movie_character_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_medium">
 
                 <TextView
-                    android:id="@+id/text_videos_title"
+                    android:id="@+id/text_character_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Videos"
+                    android:text="Character and Voice Actors"
                     android:textStyle="bold"/>
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/movie_videos"
+                    android:id="@+id/anime_character"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/text_videos_title"
+                    android:layout_below="@+id/text_character_title"
                     android:background="@color/background"
                     android:orientation="horizontal"
                     android:paddingTop="@dimen/spacing_medium"
@@ -161,10 +161,10 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/card_anime_reviews"
+            android:id="@+id/card_anime_openingtheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/card_anime_videos"
+            android:layout_below="@+id/card_anime_character"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/spacing_small"
             android:layout_marginLeft="@dimen/movie_detail_cards_margin_left_right"
@@ -177,17 +177,51 @@
                 android:padding="@dimen/spacing_medium">
 
                 <TextView
-                    android:id="@+id/text_reviews_title"
+                    android:id="@+id/text_openingtheme_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Review"
+                    android:text="Opening Theme"
                     android:textStyle="bold"/>
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/anime_reviews"
+                    android:id="@+id/anime_openingtheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/text_reviews_title"
+                    android:layout_below="@id/text_openingtheme_title"
+                    android:paddingTop="@dimen/spacing_medium"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_anime_closingtheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card_anime_openingtheme"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:layout_marginLeft="@dimen/movie_detail_cards_margin_left_right"
+            android:layout_marginRight="@dimen/movie_detail_cards_margin_left_right"
+            android:layout_marginTop="@dimen/spacing_small">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_medium">
+
+                <TextView
+                    android:id="@+id/text_closingtheme_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Closing Theme"
+                    android:textStyle="bold"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/anime_closingtheme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_closingtheme_title"
                     android:paddingTop="@dimen/spacing_medium"/>
 
             </RelativeLayout>

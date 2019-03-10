@@ -23,6 +23,9 @@ public interface APIService {
     Observable<MALTopResponse> getTopAnime(@Path("type") String type,
                                            @Path("page") Integer page);
 
-    @GET("anime/{malId}")
+    @GET("anime/{malId}/")
     Observable<AnimeModel> getAnime(@Path("malId") Integer malId);
+
+    @GET("anime/{malId}/characters_staff")
+    Observable<AnimeModel> getCharacter(@Path("malId") Integer malId);
 }
