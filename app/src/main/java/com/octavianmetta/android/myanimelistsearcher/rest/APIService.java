@@ -3,6 +3,7 @@ package com.octavianmetta.android.myanimelistsearcher.rest;
 import com.octavianmetta.android.myanimelistsearcher.models.MALSearchResponse;
 import com.octavianmetta.android.myanimelistsearcher.models.MALTopResponse;
 import com.octavianmetta.android.myanimelistsearcher.models.anime.AnimeModel;
+import com.octavianmetta.android.myanimelistsearcher.models.anime.characterStaff.CharacterStaff;
 
 
 import io.reactivex.Observable;
@@ -27,5 +28,5 @@ public interface APIService {
     Observable<AnimeModel> getAnime(@Path("malId") Integer malId);
 
     @GET("anime/{malId}/characters_staff")
-    Observable<AnimeModel> getCharacter(@Path("malId") Integer malId);
+    Observable<CharacterStaff> getCharacter(@Path("malId") Integer malId);
 }

@@ -17,6 +17,7 @@ import com.octavianmetta.android.myanimelistsearcher.databinding.RecyclerviewLay
 import com.octavianmetta.android.myanimelistsearcher.models.MALSearchResponse;
 import com.octavianmetta.android.myanimelistsearcher.models.MALResults;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MALAdapter extends RecyclerView.Adapter<MALAdapter.MALViewHolder> {
@@ -87,6 +88,11 @@ public class MALAdapter extends RecyclerView.Adapter<MALAdapter.MALViewHolder> {
     public void updateMALResults(List<MALResults> malSearchResults){
         this.malResultsList = malSearchResults;
         Log.d("Result", malResultsList.get(0).getTitle());
+        notifyDataSetChanged();
+    }
+
+    public void clearResults(){
+        this.malResultsList = new ArrayList<>();
         notifyDataSetChanged();
     }
 }

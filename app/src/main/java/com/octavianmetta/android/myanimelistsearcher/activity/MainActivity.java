@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 //saat enter dutekan setelah search, panggil loadMALSearch untuk dapat hasil search
                 binding.itemProgressBar.setVisibility(View.VISIBLE);
                 searchView.clearFocus();
+                malAdapter.clearResults();
                 viewModel.loadMALSearch(query);
 
                 return false;

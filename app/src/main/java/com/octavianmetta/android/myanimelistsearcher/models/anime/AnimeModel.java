@@ -11,6 +11,7 @@ import java.util.List;
 import com.bumptech.glide.Glide;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.octavianmetta.android.myanimelistsearcher.BR;
 
 public class AnimeModel extends BaseObservable {
 
@@ -188,12 +189,14 @@ public class AnimeModel extends BaseObservable {
         this.trailerUrl = trailerUrl;
     }
 
+    @Bindable
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+        notifyPropertyChanged(BR.title);
     }
 
     public String getTitleEnglish() {
@@ -260,12 +263,14 @@ public class AnimeModel extends BaseObservable {
         this.airing = airing;
     }
 
+    @Bindable
     public Aired getAired() {
         return aired;
     }
 
     public void setAired(Aired aired) {
         this.aired = aired;
+        notifyPropertyChanged(BR.aired);
     }
 
     public String getDuration() {
@@ -284,12 +289,14 @@ public class AnimeModel extends BaseObservable {
         this.rating = rating;
     }
 
+    @Bindable
     public Double getScore() {
         return score;
     }
 
     public void setScore(Double score) {
         this.score = score;
+        notifyPropertyChanged(BR.score);
     }
 
     public Integer getScoredBy() {
@@ -332,12 +339,14 @@ public class AnimeModel extends BaseObservable {
         this.favorites = favorites;
     }
 
+    @Bindable
     public String getSynopsis() {
         return synopsis;
     }
 
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
+        notifyPropertyChanged(BR.synopsis);
     }
 
     public Object getBackground() {

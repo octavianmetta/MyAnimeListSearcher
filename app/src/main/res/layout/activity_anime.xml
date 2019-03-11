@@ -7,11 +7,13 @@
 
         </variable>
     </data>
-
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -137,7 +139,8 @@
                 android:id="@+id/card_movie_character_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/spacing_medium">
+                android:padding="@dimen/spacing_medium"
+                android:focusableInTouchMode="true">
 
                 <TextView
                     android:id="@+id/text_character_title"
@@ -149,7 +152,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/anime_character"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_below="@+id/text_character_title"
                     android:background="@color/background"
                     android:orientation="horizontal"
@@ -174,7 +177,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/spacing_medium">
+                android:padding="@dimen/spacing_medium"
+                android:focusableInTouchMode="true">
 
                 <TextView
                     android:id="@+id/text_openingtheme_title"
@@ -229,4 +233,7 @@
         </android.support.v7.widget.CardView>
 
     </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>
+
 </layout>

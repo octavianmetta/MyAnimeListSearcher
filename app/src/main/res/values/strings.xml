@@ -3,7 +3,7 @@
     <string name="thumbnail_desc">Thumbnail of anime or manga</string>
     <string name="search_title">My Anime List Searcher</string>
     <string name="search_hint">Title</string>
-    <string name="title_activity_anime">AnimeActivity</string>
+    <string name="title_activity_anime">Anime Details</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
