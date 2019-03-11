@@ -44,16 +44,16 @@ public class AnimeActivity extends AppCompatActivity {
             malId = getIntent().getIntExtra("malId",0);
         }
 
-        AnimeModel animeModel = new AnimeModel();
-        characterList = new ArrayList<>();
-
+        //Databinding
         binding = DataBindingUtil.setContentView(this,R.layout.activity_anime);
         characterRecyclerView = binding.animeCharacter;
 
+        characterList = new ArrayList<>();
+        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false);
         characterRecyclerView.setLayoutManager(linearLayoutManager);
+
         animeViewModel = ViewModelProviders.of(this).get(AnimeDetailViewModel.class);
         characterViewModel = ViewModelProviders.of(this).get(CharacterViewModel.class);
-
         characterAdapter = new CharacterAdapter(AnimeActivity.this, characterList);
         characterRecyclerView.setAdapter(characterAdapter);
 

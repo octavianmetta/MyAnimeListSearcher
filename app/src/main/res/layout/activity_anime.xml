@@ -132,8 +132,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="@dimen/movie_detail_cards_margin_left_right"
             android:layout_marginRight="@dimen/movie_detail_cards_margin_left_right"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:background="@color/background">
+            android:layout_marginTop="@dimen/spacing_small">
 
             <RelativeLayout
                 android:id="@+id/card_movie_character_content"
@@ -154,7 +153,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/text_character_title"
-                    android:background="@color/background"
                     android:orientation="horizontal"
                     android:paddingTop="@dimen/spacing_medium"
                     app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
