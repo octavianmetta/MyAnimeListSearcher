@@ -64,7 +64,7 @@
                     android:gravity="end"
                     android:maxLines="1"
                     android:textStyle="bold"
-                    app:text="@{`(` + MAL.type + `, ` + MAL.startDate + `)`}"/>
+                    app:text="@{`(` + MAL.type + `, ` + MAL.start_year + `)`}"/>
 
                 <TextView
                     android:id="@+id/tv_Title"
