@@ -16,7 +16,8 @@ interface APIService {
     @GET("search/{type}")
     fun getSearch(@Path("type") type: String,
                   @Query("q") title: String,
-                  @Query("page") page: Int?): Observable<MALSearchResponse>
+                  @Query("page") page: Int?,
+                  @Query("limit") limit: Int?): Observable<MALSearchResponse>
 
     @GET("top/{type}/{page}/airing")
     fun getTopAnime(@Path("type") type: String,

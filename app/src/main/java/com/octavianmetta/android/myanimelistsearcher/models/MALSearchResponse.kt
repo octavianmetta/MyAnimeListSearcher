@@ -6,5 +6,5 @@ data class MALSearchResponse(
         var request_hash: String,
         var request_cached: Boolean?,
         var request_cache_expiry: Int?,
-        var results: List<MALResults>,
+        var results: ArrayList<MALResults>,
         var last_page: Int?) : BaseObservable()

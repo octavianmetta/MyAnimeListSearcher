@@ -18,8 +18,13 @@ import com.octavianmetta.android.myanimelistsearcher.models.MALResults
 
 import java.util.ArrayList
 
-class MALAdapter(private val mCtx: Context, var malResultsList: List<MALResults>)
+
+
+
+class MALAdapter(private val mCtx: Context, var malResultsList: ArrayList<MALResults>)
     : RecyclerView.Adapter<MALAdapter.MALViewHolder>() {
+
+
 
     inner class MALViewHolder(val binding: RecyclerviewLayoutBinding) : RecyclerView.ViewHolder(binding.getRoot()) {
 
@@ -28,6 +33,7 @@ class MALAdapter(private val mCtx: Context, var malResultsList: List<MALResults>
             binding.executePendingBindings()
         }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MALViewHolder {
         var viewHolder: MALViewHolder? = null
@@ -59,7 +65,7 @@ class MALAdapter(private val mCtx: Context, var malResultsList: List<MALResults>
 
     }
 
-    fun updateMALResults(malSearchResults: List<MALResults>) {
+    fun updateMALResults(malSearchResults: ArrayList<MALResults>) {
         this.malResultsList = malSearchResults
         Log.d("Result", malResultsList!![0].title)
         notifyDataSetChanged()
@@ -69,4 +75,12 @@ class MALAdapter(private val mCtx: Context, var malResultsList: List<MALResults>
         this.malResultsList = ArrayList()
         notifyDataSetChanged()
     }
+
+    fun addData(listItems: ArrayList<MALResults>) {
+        var size = this.malResultsList.size
+        this.malResultsList.addAll(listItems)
+        var sizeNew = this.malResultsList.size
+        notifyItemRangeChanged(size, sizeNew)
+    }
+
 }

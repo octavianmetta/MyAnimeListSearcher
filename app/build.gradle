@@ -69,8 +69,16 @@ dependencies {
     compileOnly "org.glassfish:javax.annotation:3.1.1"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    implementation 'com.android.support:design:25.3.1'
+    implementation 'org.jetbrains.anko:anko-commons:0.10.1'
+
+    // This dependency is required only if you want to use a RxJava2 retrofit adapter.
+    implementation 'com.github.xmartlabs.fountain:fountain-rx2:0.5.0'
+
 
 }
 repositories {
     mavenCentral()
+    maven { url "https://jitpack.io" }
+
 }

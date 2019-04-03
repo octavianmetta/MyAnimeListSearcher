@@ -16,6 +16,7 @@ import android.view.View
 
 import com.octavianmetta.android.myanimelistsearcher.R
 import com.octavianmetta.android.myanimelistsearcher.adapter.MALAdapter
+import com.octavianmetta.android.myanimelistsearcher.adapter.PaginationScrollListener
 import com.octavianmetta.android.myanimelistsearcher.databinding.ActivityMainBinding
 import com.octavianmetta.android.myanimelistsearcher.models.MALResults
 import com.octavianmetta.android.myanimelistsearcher.viewModel.MALSearchViewModel
@@ -28,9 +29,13 @@ class MainActivity : AppCompatActivity() {
     private var recyclerView: RecyclerView? = null
     private var malAdapter: MALAdapter? = null
     lateinit var binding: ActivityMainBinding
-    private var malResultsList: List<MALResults>? = ArrayList()
+    private var malResultsList: ArrayList<MALResults>? = ArrayList()
     private var viewModel: MALSearchViewModel? = null
     private var linearLayoutManager: LinearLayoutManager? = null
+    var isLastPage: Boolean = false
+    var isLoading: Boolean = false
+    var page: Int = 1
+    var searchQuery: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,13 +56,30 @@ class MainActivity : AppCompatActivity() {
 
         binding.itemProgressBar.setVisibility(View.VISIBLE)
 
+        recyclerView?.addOnScrollListener(object : PaginationScrollListener(linearLayoutManager!!){
+            override fun isLastPage(): Boolean {
+                return isLastPage
+            }
+
+            override fun isLoading(): Boolean {
+                return isLoading
+            }
+
+            override fun loadMoreItems() {
+                isLoading = true
+                //you have to call loadmore items to get more data
+                getMoreItems()
+            }
+        })
 
 
         //Panggil getMALData untuk dapat top airing anime dan observe
         viewModel!!.malData!!.observe(this@MainActivity, Observer { malResultsList ->
             //Jika MALResults berubah, update ke adapter
             Log.d("Diterima", malResultsList!![0].title)
-            malAdapter!!.updateMALResults(malResultsList)
+            malAdapter!!.addData(malResultsList)
+            //malAdapter!!.updateMALResults(malResultsList)
+
             binding.itemProgressBar.setVisibility(View.INVISIBLE)
         })
     }
@@ -77,7 +99,9 @@ class MainActivity : AppCompatActivity() {
                 binding.itemProgressBar.setVisibility(View.VISIBLE)
                 searchView.clearFocus()
                 malAdapter!!.clearResults()
-                viewModel!!.loadMALSearch(query)
+                searchQuery = query
+                page = 1
+                viewModel!!.loadMALSearch(query, page)
 
                 return false
             }
@@ -88,5 +112,19 @@ class MainActivity : AppCompatActivity() {
         })
         return super.onCreateOptionsMenu(menu)
     }
+
+    fun getMoreItems() {
+        //after fetching your data assuming you have fetched list in your
+        // recyclerview adapter assuming your recyclerview adapter is
+        //rvAdapter
+        //after getting your data you have to assign false to isLoading
+        isLoading = false
+        if (searchQuery.length < 3){
+            viewModel!!.initMALData(++page)
+        }else {
+            viewModel!!.loadMALSearch(searchQuery, ++page)
+        }
+    }
+
 }
 //TODO : pagination

@@ -24,22 +24,22 @@ class MALSearchViewModel : ViewModel() {
     private val malApi = retrofit?.create(APIService::class.java)
 
     //Init RxJava untuk search
-    private var malResults: MutableLiveData<List<MALResults>>? = null
+    private var malResults: MutableLiveData<ArrayList<MALResults>>? = null
     private val compositeDisposable = CompositeDisposable()
 
-    val malData: LiveData<List<MALResults>>?
+    val malData: LiveData<ArrayList<MALResults>>?
         get() {
             if (malResults == null) {
                 malResults = MutableLiveData()
-                initMALData()
+                initMALData(1)
             }
             return malResults
         }
 
 
-    private fun initMALData() {
+    fun initMALData(page: Int) {
         //Dipanggil ketika program pertama berjalan. Untuk mendapatkan top airing anime
-        val malObservable = malApi?.getTopAnime("anime", 1)
+        val malObservable = malApi?.getTopAnime("anime", page)
         malObservable!!.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<MALTopResponse> {
@@ -62,9 +62,9 @@ class MALSearchViewModel : ViewModel() {
                 })
     }
 
-    fun loadMALSearch(title: String) {
+    fun loadMALSearch(title: String, page: Int) {
         //Dijalankan setelah search. Untuk mendapatkan data hasil search
-        val malObservable = malApi?.getSearch("anime", title, 1)
+        val malObservable = malApi?.getSearch("anime", title, page, 5)
         malObservable!!.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<MALSearchResponse> {

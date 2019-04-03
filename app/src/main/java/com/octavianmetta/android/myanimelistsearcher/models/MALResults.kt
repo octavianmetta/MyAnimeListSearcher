@@ -29,7 +29,8 @@ data class MALResults(
                     .into(imageView)
         }
     }
-    val start_year: String get() = startDate.substring(0,4)
+    val start_year: String
+        get() = startDate?.substring(0,4)
 
 
 }
