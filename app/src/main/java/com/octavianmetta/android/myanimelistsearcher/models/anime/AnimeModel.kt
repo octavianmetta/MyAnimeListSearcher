@@ -45,14 +45,14 @@ data class AnimeModel(
         val opening_themes : List<String>,
         val ending_themes : List<String>) : BaseObservable() {
 
-    companion object {
+   /* companion object {
         @JvmStatic @BindingAdapter("imageUrl")
         fun loadImage(view: ImageView, image_url: String?) {
             Glide.with(view.context)
                     .load(image_url)
                     .into(view)
         }
-    }
+    }*/
 
     val scoreString : String get() = score.toString()
     val airedString : String get() = aired.toString()

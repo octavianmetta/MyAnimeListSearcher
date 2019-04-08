@@ -19,16 +19,16 @@ data class MALResults(
         var score: Double?,
         @SerializedName("start_date") var startDate: String,
         @SerializedName("end_date") var endDate: String,
-        var members: Int?,
+        //var members: Int?,
         var rated: String) : BaseObservable() {
-    companion object {
+    /*companion object {
         @JvmStatic @BindingAdapter("imageUrl")
         fun setImageUrl(imageView: ImageView, image_url: String?) {
             Glide.with(imageView.context)
                     .load(image_url)
                     .into(imageView)
         }
-    }
+    } */
     val start_year: String
         get() = startDate?.substring(0,4)
 

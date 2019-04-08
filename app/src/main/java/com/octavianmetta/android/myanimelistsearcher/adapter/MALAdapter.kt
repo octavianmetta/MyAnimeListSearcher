@@ -21,9 +21,13 @@ import java.util.ArrayList
 
 
 
+
+
 class MALAdapter(private val mCtx: Context, var malResultsList: ArrayList<MALResults>)
     : RecyclerView.Adapter<MALAdapter.MALViewHolder>() {
 
+    private val VIEW_TYPE_ITEM = 0
+    private val VIEW_TYPE_LOADING = 1
 
 
     inner class MALViewHolder(val binding: RecyclerviewLayoutBinding) : RecyclerView.ViewHolder(binding.getRoot()) {

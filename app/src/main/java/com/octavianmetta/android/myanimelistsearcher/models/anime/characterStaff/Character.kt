@@ -26,13 +26,13 @@ data class Character(
         @SerializedName("voice_actors")
         val voiceActors: List<VoiceActor>) : BaseObservable() {
 
-            @BindingAdapter("imageUrl")
+            /*@BindingAdapter("imageUrl")
             fun loadImage(view: ImageView, imageUrl: String) {
                 Glide.with(view.context)
                         .load(imageUrl)
                         .into(view)
                 Log.d("Picture", "Loaded")
-            }
+            } */
 
 
 }
